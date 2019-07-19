@@ -99,9 +99,11 @@ def get_proximity(organism_1, organism_2):
 
 
 def interaction(organism, other_organism, organisms, settings, proximity):
-    if organism.passive_gens.strong >= other_organism.passive_gens.protection:
+    if organism.passive_gens.strong + organism.passive_gens.size >= \
+            other_organism.passive_gens.protection + other_organism.passive_gens.size:
         eating(organism, other_organism, organisms, settings)
-    elif other_organism.passive_gens.strong > organism.passive_gens.protection:
+    elif other_organism.passive_gens.strong + other_organism.passive_gens.size > \
+            organism.passive_gens.protection + organism.passive_gens.size:
         eating(other_organism, organism, organisms, settings)
     else:
         handle_losses(organism, other_organism, organisms, settings, proximity)
