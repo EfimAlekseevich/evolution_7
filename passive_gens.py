@@ -12,7 +12,7 @@ class PassiveGens:
         self.protection = 5
         self.strong = 5
 
-        self.strong_mutation = 10
+        self.strong_mutation = 5
 
     def __str__(self):
         out_info = ''

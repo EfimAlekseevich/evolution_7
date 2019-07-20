@@ -10,13 +10,16 @@ def perform_actions(organism, organisms, settings):
 def do_action(organism, organisms, settings):
     action = organism.get_active_gen()
     if action == 0:
-        organism.health += organism.passive_gens.nutrition['sun'] * settings.environment.sun * organism.passive_gens.size
+        organism.health += organism.passive_gens.nutrition['sun'] * settings.environment.sun *\
+                           organism.passive_gens.size
     elif action == 5:
         organism.health -= settings.environment.losses.sleep
     else:
         perform_move(action, organism, settings)
-    verify_collisions(organism, organisms, settings)
-    return verify_organism(organism, organisms, settings)
+    if verify_collisions(organism, organisms, settings):
+        return True
+    else:
+        return verify_organism(organism, organisms, settings)
 
 
 def verify_organism(organism, organisms, settings):
@@ -34,13 +37,14 @@ def death(organism, organisms, settings):
     else:
         organism.age = 0
         organism.generation += 1
-        organism.health = 90000
+        organism.health = int(settings.max_health * settings.parent_health)
         organism.full_mutation(settings)
 
 
 def give_birth(organism, organisms, settings):
-    organism.health = 80000
+    organism.health = int(settings.max_health * settings.parent_health)
     heir = organism.get_heir(settings)
+    heir.health = int(settings.max_health * settings.heir_health)
     correct_place(heir, settings)
     organisms.append(heir)
 
@@ -78,14 +82,15 @@ def verify_collisions(organism, organisms, settings):
         if other_organism is not organism:
             proximity = get_proximity(organism, other_organism)
             if proximity < 0:
-                interaction(organism, other_organism, organisms, settings, proximity)
+                if interaction(organism, other_organism, organisms, settings, proximity):
+                    return True
 
 
 def eating(winner, food, organisms, settings):
     benefit = (winner.passive_gens.nutrition['plant'] * food.passive_gens.nutrition['sun'] *
-               settings.environment.losses.eat_sun) + \
+               settings.environment.eat_sun) + \
               (winner.passive_gens.nutrition['meat'] * food.passive_gens.nutrition['plant'] *
-               settings.environment.losses.eat_plant)
+               settings.environment.eat_plant)
     winner.health += benefit
     organisms.remove(food)
 
@@ -105,6 +110,9 @@ def interaction(organism, other_organism, organisms, settings, proximity):
     elif other_organism.passive_gens.strong + other_organism.passive_gens.size > \
             organism.passive_gens.protection + organism.passive_gens.size:
         eating(other_organism, organism, organisms, settings)
+        if other_organism.health > settings.max_health:
+            give_birth(other_organism, organisms, settings)
+        return True
     else:
         handle_losses(organism, other_organism, organisms, settings, proximity)
 

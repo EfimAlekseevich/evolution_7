@@ -1,11 +1,9 @@
 class Losses:
     def __init__(self):
-        self.common = 200
-        self.move = 1000
+        self.common = 500
+        self.move = 200
         self.sleep = 50
-        self.sun_sun = 0.05
-        self.eat_plant = 1
-        self.eat_sun = 1
+        self.sun_sun = 1.2
 
 
 class Environment:
@@ -15,4 +13,6 @@ class Environment:
         self.border_size = 4
         self.border_color = (250, 50, 10)
         self.sun = 50
+        self.eat_plant = 1.5
+        self.eat_sun = 1.5
         self.losses = Losses()

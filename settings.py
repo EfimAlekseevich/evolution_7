@@ -4,8 +4,8 @@ from environment import Environment
 class Settings:
     def __init__(self):
 
-        self.screen_width = 144
-        self.screen_height = 480
+        self.screen_width = 480
+        self.screen_height = 360
         self.text_color = (0, 50, 0)
         self.bg_color = None
         self.brightness = 1
@@ -17,10 +17,13 @@ class Settings:
         self.strong_mutation = 0
         self.max_health = 1000000
 
+        self.parent_health = 0.3
+        self.heir_health = 0.1
+
         self.update_bg_color()
 
     def update_bg_color(self):
-        self.brightness = self.environment.sun / 100
+        self.brightness = self.environment.sun // 100
 
         def get_color(mi, ma):
             changing = ma - mi

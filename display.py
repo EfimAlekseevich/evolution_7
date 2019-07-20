@@ -1,24 +1,26 @@
 def show_records(screen, cycle_count, settings, font, organisms):
+    records = {
+        'num_org-s': len(organisms),
+        'cycles': cycle_count,
+        'brightness_sun': settings.environment.sun,
+        'max FPS': settings.fps,
+        '+-) mutations': settings.strong_mutation,
+        '1) max_health': settings.max_health,
+        '2) parent_heath': settings.parent_health,
+        '3) heir_heath': settings.heir_health,
+        '4) -common': settings.environment.losses.common,
+        '5) -move': settings.environment.losses.move,
+        '6) -sleep': settings.environment.losses.sleep,
+        '7)-sun': settings.environment.losses.sun_sun,
+        '8) +plant': settings.environment.eat_plant,
+        '9) +sun': settings.environment.eat_sun,
+    }
+    indent = settings.environment.width + 10
 
-    num_organisms = font.render('number org-s = ' + str(len(organisms)), True, settings.text_color)
-    cycles = font.render('cycles = ' + str(cycle_count), True, settings.text_color)
-    light = font.render('brightness_sun = ' + str(settings.environment.sun), True, settings.text_color)
-    fps = font.render('max FPS = ' + str(settings.fps), True, settings.text_color)
-    common = font.render('1)-common = ' + str(settings.environment.losses.common), True, settings.text_color)
-    move = font.render('2)-move = ' + str(settings.environment.losses.move), True, settings.text_color)
-    sleep = font.render('3)-sleep = ' + str(settings.environment.losses.sleep), True, settings.text_color)
-    sun_sun = font.render('4)-sun = ' + str(settings.environment.losses.sun_sun), True, settings.text_color)
-    plant = font.render('5)+plant = ' + str(settings.environment.losses.eat_plant), True, settings.text_color)
-    sun = font.render('6)+sun = ' + str(settings.environment.losses.eat_sun), True, settings.text_color)
+    num_string = 0
 
-    indent = settings.environment.width + 15
-    screen.blit(num_organisms, (indent, 0))
-    screen.blit(cycles, [indent, 26])
-    screen.blit(light, [indent, 52])
-    screen.blit(fps, [indent, 78])
-    screen.blit(common, [indent, 102])
-    screen.blit(move, [indent, 126])
-    screen.blit(sleep, [indent, 154])
-    screen.blit(sun_sun, [indent, 180])
-    screen.blit(plant, [indent, 206])
-    screen.blit(sun, [indent, 232])
+    for parameter, value in records.items():
+        text = f'{parameter} = {str(round(value, 2))}'
+        record = font.render(text, True, settings.text_color)
+        screen.blit(record, (indent, num_string * 26))
+        num_string += 1

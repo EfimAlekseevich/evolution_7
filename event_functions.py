@@ -1,5 +1,6 @@
 import pygame
 import statistics as stat
+from main_functions import give_birth
 
 
 def check_events(settings, organisms):
@@ -39,31 +40,54 @@ def check_control_events(event, settings, organisms):
             settings.fps += 1
 
     elif event.key == pygame.K_1:
-        settings.environment.losses.common += 10
-    elif event.key == pygame.K_F1:
-        settings.environment.losses.common -= 10
+        settings.max_health += 10000
+    elif event.key == pygame.K_F1 and settings.max_health > 10000:
+        settings.max_health -= 10000
+        for organism in organisms:
+            if organism.health > settings.max_health:
+                give_birth(organism, organisms, settings)
 
     elif event.key == pygame.K_2:
-        settings.environment.losses.move += 10
-    elif event.key == pygame.K_F2:
-        settings.environment.losses.move -= 10
+        settings.parent_health += 0.01
+    elif event.key == pygame.K_F2 and settings.parent_health > 0.01:
+        settings.parent_health -= 0.01
 
     elif event.key == pygame.K_3:
-        settings.environment.losses.sleep += 5
-    elif event.key == pygame.K_F3:
-        settings.environment.losses.sleep -= 5
+        settings.heir_health += 0.01
+    elif event.key == pygame.K_F3 and settings.heir_health > 0.01:
+        settings.heir_health -= 0.01
 
     elif event.key == pygame.K_4:
-        settings.environment.losses.sun_sun += 0.01
+        settings.environment.losses.common += 10
     elif event.key == pygame.K_F4:
-        settings.environment.losses.sun_sun -= 0.01
+        settings.environment.losses.common -= 10
 
     elif event.key == pygame.K_5:
-        settings.environment.losses.eat_plant += 0.01
+        settings.environment.losses.move += 10
     elif event.key == pygame.K_F5:
-        settings.environment.losses.eat_plant -= 0.01
+        settings.environment.losses.move -= 10
 
     elif event.key == pygame.K_6:
-        settings.environment.losses.eat_sun += 0.01
+        settings.environment.losses.sleep += 5
     elif event.key == pygame.K_F6:
-        settings.environment.losses.eat_sun -= 0.01
+        settings.environment.losses.sleep -= 5
+
+    elif event.key == pygame.K_7:
+        settings.environment.losses.sun_sun += 0.01
+    elif event.key == pygame.K_F7:
+        settings.environment.losses.sun_sun -= 0.01
+
+    elif event.key == pygame.K_8:
+        settings.environment.eat_plant += 0.01
+    elif event.key == pygame.K_F8:
+        settings.environment.eat_plant -= 0.01
+
+    elif event.key == pygame.K_9:
+        settings.environment.eat_sun += 0.01
+    elif event.key == pygame.K_F9:
+        settings.environment.eat_sun -= 0.01
+
+    elif event.key == pygame.K_KP_PLUS:
+        settings.strong_mutation += 1
+    elif event.key == pygame.K_KP_MINUS and settings.strong_mutation > 1:
+        settings.strong_mutation -= 1

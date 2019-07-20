@@ -10,7 +10,7 @@ def main():
     settings = Settings()
 
     pygame.init()
-    screen = pygame.display.set_mode((settings.screen_width + 200, settings.screen_height))
+    screen = pygame.display.set_mode((settings.screen_width + 220, settings.screen_height))
     pygame.display.set_caption(const.caption)
     clock = pygame.time.Clock()
     cycle_count = 0
