@@ -8,7 +8,6 @@ from main_functions import perform_actions
 
 def main():
     settings = Settings()
-
     pygame.init()
     screen = pygame.display.set_mode((settings.screen_width + 220, settings.screen_height))
     pygame.display.set_caption(const.caption)
@@ -35,6 +34,8 @@ def main():
 
         if settings.run:
             cycle_count += 1
+            if cycle_count % settings.cycles_between_records == 0:
+                settings.update_statistics(organisms, cycle_count)
 
         pygame.display.flip()
 

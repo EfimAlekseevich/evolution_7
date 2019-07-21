@@ -126,3 +126,6 @@ dmypy.json
 # My files
 .idea/
 experiments/
+statistics/
+starts.csv
+directions/
