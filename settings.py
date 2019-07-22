@@ -27,7 +27,7 @@ class Settings:
         self.update_bg_color()
 
     def update_bg_color(self):
-        self.brightness = self.environment.sun // 100
+        self.brightness = self.environment.sun / 100
 
         def get_color(mi, ma):
             changing = ma - mi

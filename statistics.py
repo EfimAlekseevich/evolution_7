@@ -94,7 +94,7 @@ def write_start(start):
 def prepare_stat_file(start):
     if not path.exists(statistics_dir):
         makedirs(statistics_dir)
-    stat_filename = f'N{start}|{str(datetime.now())}|{user}|{os}'
-    stat_file = open(f'statistics/{stat_filename}.csv', 'w')
+    stat_filename = f'N{start}=={str(datetime.now().strftime("%Y.%m.%d..%H.%M"))}=={user}=={os}'
+    stat_file = open(f'{statistics_dir}{stat_filename}.csv', 'w')
     stat_file.write(','.join(records))
     return stat_file

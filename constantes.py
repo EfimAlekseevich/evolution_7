@@ -5,9 +5,14 @@ from os import uname
 caption = 'Evolution'
 first_organism = Organism(100, 100, list(range(0, 10)), PassiveGens(), 0)
 starts_parameters = 'number, datatime, user, os'
-statistics_dir = 'statistics/'
+
 os = str(uname().sysname)
 user = str(uname().nodename)
+statistics_dir = 'statistics'
+if os == 'Windows':
+    statistics_dir += '\\'[0]
+else:
+    statistics_dir += '/'
 
 records = [
     'cycle',
