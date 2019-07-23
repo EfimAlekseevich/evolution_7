@@ -17,7 +17,7 @@ def check_control_events(event, settings, organisms):
     elif event.key == pygame.K_o:
         stat.print_oldest_organism(organisms)
     elif event.key == pygame.K_s:
-        stat.print_organisms_statistics(stat.get_organisms_statistics(organisms), len(organisms))
+        stat.print_organisms_statistics(organisms, len(organisms))
 
     elif event.key == pygame.K_0:
         settings.__init__()

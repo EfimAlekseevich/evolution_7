@@ -19,7 +19,8 @@ def print_oldest_organism(organisms):
     print(oldest_organism)
 
 
-def print_organisms_statistics(organisms_sums, num_organisms):
+def print_organisms_statistics(organisms, num_organisms):
+    organisms_sums = get_organisms_statistics(organisms)
     for key, value in organisms_sums.items():
         print(f'\n{str(key)} = {str(value)}, average = {str(value / num_organisms)}')
     print(f'average photosintesis gens: {str(organisms_sums["s a g 0"] * 100 / organisms_sums["s a gens"])}%')
