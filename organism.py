@@ -63,6 +63,10 @@ class Organism:
         self.gen_count += 1
         return action
 
+    def update_radius(self, settings):
+        coefficient_health = 2 * self.health / settings.max_health
+        self.radius = int(coefficient_health * self.passive_gens.size) + 2
+
     def get_color(self, settings):
         color = []
         coefficient_health = self.health / settings.max_health
@@ -71,4 +75,5 @@ class Organism:
         return color
 
     def draw(self, screen, settings):
+        self.update_radius(settings)
         pygame.draw.circle(screen, self.get_color(settings), (self.x, self.y), self.radius)
