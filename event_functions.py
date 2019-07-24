@@ -6,6 +6,7 @@ from main_functions import give_birth
 def check_events(settings, organisms):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            settings.stat_file.close()
             quit()
         elif event.type == pygame.KEYDOWN:
             check_control_events(event, settings, organisms)
