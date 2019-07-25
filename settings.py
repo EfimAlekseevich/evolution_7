@@ -5,7 +5,7 @@ from statistics import get_stat_file, get_organisms_statistics
 class Settings:
     def __init__(self):
 
-        self.screen_width = 480
+        self.screen_width = 360
         self.screen_height = 360
         self.text_color = (0, 50, 0)
         self.bg_color = None
@@ -15,8 +15,8 @@ class Settings:
         self.run = True
 
         self.environment = Environment(self)
-        self.strong_mutation = 0
-        self.max_health = 1000000
+        self.strong_mutation = 15
+        self.max_health = 1500000
 
         self.parent_health = 0.3
         self.heir_health = 0.1

@@ -12,7 +12,7 @@ class Environment:
         self.height = settings.screen_height
         self.border_size = 4
         self.border_color = (250, 50, 10)
-        self.sun = 50
-        self.eat_plant = 1.5
-        self.eat_sun = 1.5
+        self.sun = 70
+        self.eat_plant = 3.5
+        self.eat_sun = 3.5
         self.losses = Losses()

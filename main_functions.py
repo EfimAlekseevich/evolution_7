@@ -91,7 +91,7 @@ def eating(winner, food, organisms, settings):
                settings.environment.eat_sun) + \
               (winner.passive_gens.nutrition['meat'] * food.passive_gens.nutrition['plant'] *
                settings.environment.eat_plant)
-    winner.health += benefit
+    winner.health += benefit * food.health // settings.max_health
     organisms.remove(food)
 
 
@@ -105,10 +105,10 @@ def get_proximity(organism_1, organism_2):
 
 def interaction(organism, other_organism, organisms, settings, proximity):
     if organism.passive_gens.strong * 2 + organism.passive_gens.size >= \
-            other_organism.passive_gens.protection + other_organism.passive_gens.size:
+            (other_organism.passive_gens.protection + other_organism.passive_gens.size) * 1.5:
         eating(organism, other_organism, organisms, settings)
     elif other_organism.passive_gens.strong * 2 + other_organism.passive_gens.size > \
-            organism.passive_gens.protection + organism.passive_gens.size:
+            (organism.passive_gens.protection + organism.passive_gens.size) * 1.5:
         eating(other_organism, organism, organisms, settings)
         if other_organism.health > settings.max_health:
             give_birth(other_organism, organisms, settings)
