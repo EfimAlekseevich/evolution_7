@@ -16,7 +16,7 @@ def main():
 
     font = pygame.font.Font(None, 24)
 
-    organisms = [const.first_organism]
+    organisms = [const.first_organism, const.first_remote_organism]
 
     while True:
         clock.tick(settings.fps)

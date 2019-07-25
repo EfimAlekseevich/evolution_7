@@ -27,6 +27,8 @@ class Organism:
 
         self.generation = parent_generation + 1
 
+        self.remote = False
+
     def __str__(self):
         out_info = '='*10 + ' ORGANISM ' + 10*'=' + '\n'
         out_info += f'Age = {str(self.age)}, Generation = {str(self.generation)}\n' \
@@ -72,3 +74,5 @@ class Organism:
 
     def draw(self, screen, settings):
         pygame.draw.circle(screen, self.get_color(settings), (self.x, self.y), self.radius)
+        if self.remote:
+            pygame.draw.circle(screen, (255, 255, 255), (self.x, self.y), self.radius // 3 + 1)

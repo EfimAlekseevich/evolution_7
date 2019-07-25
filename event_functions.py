@@ -1,14 +1,19 @@
 import pygame
 import statistics as stat
 from main_functions import give_birth
+from organism_control import check_organism_control_keydown, check_organism_control_keyup
 
 
 def check_events(settings, organisms):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            settings.stat_file.close()
             quit()
         elif event.type == pygame.KEYDOWN:
+            check_organism_control_keydown(event, settings, organisms)
             check_control_events(event, settings, organisms)
+        elif event.type == pygame.KEYUP:
+            check_organism_control_keyup(event, settings, organisms)
 
 
 def check_control_events(event, settings, organisms):

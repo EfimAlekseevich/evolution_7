@@ -33,6 +33,8 @@ def verify_organism(organism, organisms, settings):
 def death(organism, organisms, settings):
     if len(organisms) > 1:
         organisms.remove(organism)
+        if organism.remote:
+            organisms[-1].remote = True
         return True
     else:
         organism.age = 0
@@ -46,6 +48,9 @@ def give_birth(organism, organisms, settings):
     heir = organism.get_heir(settings)
     heir.health = int(settings.max_health * settings.heir_health)
     correct_place(heir, settings)
+    if organism.remote:
+        heir.remote = True
+        organism.remote = False
     organisms.append(heir)
 
 
@@ -92,7 +97,8 @@ def eating(winner, food, organisms, settings):
               (winner.passive_gens.nutrition['meat'] * food.passive_gens.nutrition['plant'] *
                settings.environment.eat_plant)
     winner.health += benefit
-    organisms.remove(food)
+    food.health = 0
+    death(food, organisms, settings)
 
 
 def get_proximity(organism_1, organism_2):

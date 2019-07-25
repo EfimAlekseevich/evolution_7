@@ -3,7 +3,11 @@ from passive_gens import PassiveGens
 from os import uname
 
 caption = 'Evolution'
+
 first_organism = Organism(100, 100, list(range(0, 10)), PassiveGens(), 0)
+first_remote_organism = Organism(120, 120, [5], PassiveGens(), 0)
+first_remote_organism.remote = True
+
 starts_parameters = 'number, datatime, user, os'
 
 os = str(uname().sysname)

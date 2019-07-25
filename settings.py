@@ -16,7 +16,7 @@ class Settings:
 
         self.environment = Environment(self)
         self.strong_mutation = 0
-        self.max_health = 1000000
+        self.max_health = 3000000
 
         self.parent_health = 0.3
         self.heir_health = 0.1
