@@ -16,5 +16,5 @@ def show_records(screen, cycle_count, settings, font, organisms):
         if parameter in control_parameters.keys():
             text = f'{control_parameters[parameter]}) {text}'
         record = font.render(text, True, settings.text_color)
-        screen.blit(record, (indent, num_string * 26))
+        screen.blit(record, (indent, num_string * 24))
         num_string += 1

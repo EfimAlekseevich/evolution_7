@@ -1,9 +1,10 @@
 from organism import Organism
 from passive_gens import PassiveGens
+from nervous_system import NervousSystem
 from os import uname
 
 caption = 'Evolution'
-first_organism = Organism(100, 100, list(range(0, 10)), PassiveGens(), 0)
+first_organism = Organism(100, 100, list(range(0, 10)), NervousSystem(), PassiveGens(), 0)
 starts_parameters = 'number, datatime, user, os'
 
 os = str(uname().sysname)
@@ -13,6 +14,7 @@ if os == 'Windows':
     statistics_dir += '\\'[0]
 else:
     statistics_dir += '/'
+
 
 records = [
     'cycle',

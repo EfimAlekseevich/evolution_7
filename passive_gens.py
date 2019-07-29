@@ -22,8 +22,8 @@ class PassiveGens:
             f'\nProtection = {str(self.protection)}, Strong = {str(self.strong)}'
         return out_info
 
-    def mutation(self, settings):
-        self.nutrition_mutation(self.strong_mutation + settings.strong_mutation)
+    def mutation(self, strong_mutation):
+        self.nutrition_mutation(self.strong_mutation + strong_mutation)
         change = randint(-1, 1)
         self.speed_size_mutation(change)
         change = randint(-1, 1)

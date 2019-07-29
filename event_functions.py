@@ -28,6 +28,11 @@ def check_control_events(event, settings, organisms):
         else:
             settings.run = True
 
+    elif event.key == pygame.K_e:
+        settings.threshold += 1
+    elif event.key == pygame.K_d:
+        settings.threshold -= 1
+
     elif event.key == pygame.K_KP4 and settings.environment.sun:
             settings.environment.sun -= 1
             settings.update_bg_color()

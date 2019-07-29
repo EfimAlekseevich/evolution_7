@@ -8,7 +8,7 @@ def perform_actions(organism, organisms, settings):
 
 
 def do_action(organism, organisms, settings):
-    action = organism.get_active_gen()
+    action = organism.get_active_gen(settings)
     if action == 0:
         organism.health += organism.passive_gens.nutrition['sun'] * settings.environment.sun *\
                            organism.passive_gens.size
@@ -82,8 +82,15 @@ def verify_collisions(organism, organisms, settings):
         if other_organism is not organism:
             proximity = get_proximity(organism, other_organism)
             if proximity < 0:
+                add_surroundings(proximity, organism, other_organism)
                 if interaction(organism, other_organism, organisms, settings, proximity):
                     return True
+
+
+def add_surroundings(proximity, organism, other_organism):
+    dif_x, dif_y = get_differences(organism, other_organism)
+    organism.nervous_system.x += dif_x * proximity
+    organism.nervous_system.y += dif_y * proximity
 
 
 def eating(winner, food, organisms, settings):
@@ -95,9 +102,14 @@ def eating(winner, food, organisms, settings):
     organisms.remove(food)
 
 
-def get_proximity(organism_1, organism_2):
+def get_differences(organism_1, organism_2):
     dif_x = organism_1.x - organism_2.x
     dif_y = organism_1.y - organism_2.y
+    return dif_x, dif_y
+
+
+def get_proximity(organism_1, organism_2):
+    dif_x, dif_y = get_differences(organism_1, organism_2)
     distance = (dif_x**2+dif_y**2)**0.5
     proximity = distance - organism_1.radius - organism_2.radius
     return proximity

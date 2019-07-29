@@ -5,7 +5,7 @@ from statistics import get_stat_file, get_organisms_statistics
 class Settings:
     def __init__(self):
 
-        self.screen_width = 360
+        self.screen_width = 200
         self.screen_height = 360
         self.text_color = (0, 50, 0)
         self.bg_color = None
@@ -23,6 +23,9 @@ class Settings:
 
         self.stat_file = get_stat_file()
         self.cycles_between_records = 10
+
+        #  self.weights_accuracy = 100
+        self.threshold = 500
 
         self.update_bg_color()
 
@@ -65,4 +68,5 @@ class Settings:
         parameters['sun-sun l'] = self.environment.losses.sun_sun
         parameters['eat plant'] = self.environment.eat_plant
         parameters['eat sun'] = self.environment.eat_sun
+        parameters['threshold'] = self.threshold
         return parameters
