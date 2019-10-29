@@ -5,7 +5,7 @@ from statistics import get_stat_file, get_organisms_statistics
 class Settings:
     def __init__(self):
 
-        self.screen_width = 200
+        self.screen_width = 240
         self.screen_height = 360
         self.text_color = (0, 50, 0)
         self.bg_color = None

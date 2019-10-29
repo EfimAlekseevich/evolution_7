@@ -70,7 +70,7 @@ class Organism:
 
     def get_color(self, settings):
         color = []
-        coefficient_health = self.health / settings.max_health
+        coefficient_health = self.health / settings.max_health if self.health <= settings.max_health else 1
         for spectrum in self.passive_gens.nutrition.values():
             color.append(int(spectrum * coefficient_health))
         return color
